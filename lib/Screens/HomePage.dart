@@ -1,6 +1,8 @@
 import 'package:crazy_slots/Utilities/Algorithm.dart';
+import 'package:crazy_slots/Utilities/SymbolsList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'home_page';
@@ -27,8 +29,9 @@ class _HomePageState extends State<HomePage> {
 
     void _spin() {
       setState(() {
-        first = _rotateList(first, 1);
-        print(first);
+        Provider.of<SymbolsList>(context, listen: false).first = _rotateList(
+            Provider.of<SymbolsList>(context, listen: false).first, 1);
+        print(Provider.of<SymbolsList>(context, listen: false).first);
       });
     }
 
@@ -45,7 +48,7 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.symmetric(
                   horizontal: _width * 0.02, vertical: _height * 0.015),
               child: Text(
-                displayList[0],
+                Provider.of<SymbolsList>(context, listen: false).first[0],
                 style: TextStyle(fontSize: _height * 0.021),
               ),
             ),
